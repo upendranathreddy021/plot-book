@@ -1,0 +1,91 @@
+@import '../abstracts/mixins';
+@import '../abstracts/variables';
+
+/* width */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #999; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #666; 
+  }
+
+.fs-md, p{
+    @include fs-md(0.85rem);
+}
+
+.text-sm{
+    @include fs-md(0.85rem);
+}
+
+small{
+    font-size: 0.75em;
+    color: #666;
+    line-height: 1.2;
+    font-weight: 500;
+}
+
+.text-justify{
+    text-align: justify
+}
+
+.fw-100{
+    @include font-weight(thin);
+}
+
+.fw-200{
+    @include font-weight(extra-light);
+}
+
+.fw-300{
+    @include font-weight(light);
+}
+
+.fw-400{
+    @include font-weight(normal);
+}
+
+.fw-500{
+    @include font-weight(medium);
+}
+
+.fw-600{
+    @include font-weight(semi-bold);
+}
+
+.py-6{
+    padding-top: 6rem !important;
+    padding-bottom: 6rem !important;
+}
+
+.text-lime-green{
+    color: $lime-green;
+}
+
+.text-green{
+    color: $green;
+}
+
+.text-light-green{
+    color: $light-green;
+}
+
+.bg-lime-green{
+    background-color: $lime-green
+}
+
+.vh-80{
+    height: 80vh;
+}

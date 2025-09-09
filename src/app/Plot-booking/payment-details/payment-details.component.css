@@ -1,0 +1,144 @@
+/* Mobile and Tablet Responsiveness */
+@media (max-width: 768px) {
+  .table-responsive {
+    font-size: 0.875rem;
+  }
+  
+  .card-body {
+    padding: 0.5rem !important;
+  }
+  
+  .table th,
+  .table td {
+    padding: 0.5rem !important;
+    white-space: nowrap;
+  }
+  
+  /* Hide some columns on mobile */
+  .table th:nth-child(6),
+  .table td:nth-child(6),
+  .table th:nth-child(7),
+  .table td:nth-child(7) {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .container-fluid {
+    padding: 1rem !important;
+  }
+  
+  .table th:nth-child(4),
+  .table td:nth-child(4),
+  .table th:nth-child(5),
+  .table td:nth-child(5) {
+    display: none;
+  }
+  
+  .btn {
+    font-size: 0.875rem;
+    padding: 0.375rem 0.75rem;
+  }
+  
+  .modal-dialog {
+    margin: 0.5rem;
+  }
+}
+
+/* Status Cards */
+.card {
+  transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+/* Table Styling */
+.table-hover tbody tr:hover {
+  background-color: rgba(0, 123, 255, 0.05);
+}
+
+.table th {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+  color: #6c757d;
+}
+
+/* Button Styling */
+.btn-outline-primary:hover,
+.btn-outline-danger:hover {
+  transform: scale(1.05);
+}
+
+/* Form Styling */
+.form-control:focus,
+.form-select:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+}
+
+/* Modal Enhancements */
+.modal-content {
+  border: none;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 0.75rem 0.75rem 0 0;
+}
+
+.modal-title {
+  font-weight: 600;
+}
+
+/* Input Group Styling */
+.input-group-text {
+  background-color: #f8f9fa;
+  border-color: #dee2e6;
+  color: #6c757d;
+  font-weight: 500;
+}
+
+/* Card Header */
+.card-header {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+/* Total Amount Highlight */
+.card-footer h5 {
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+/* Remove custom radio button styles */
+.form-check-custom,
+.form-check-custom .form-check-input,
+.form-check-custom .form-check-label,
+.form-check-custom .form-check-input:checked,
+.form-check-custom .form-check-input:checked + .form-check-label {
+    /* Revert all custom styles to default */
+    background: none;
+    border: none;
+    box-shadow: none;
+    color: initial;
+    padding: initial;
+    border-radius: initial;
+    transition: none;
+}
+
+/* Search Mode Card */
+.card.bg-light {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%) !important;
+  border: 1px solid #dee2e6 !important;
+}
+
+.card-title {
+  color: #495057;
+  font-weight: 600;
+}

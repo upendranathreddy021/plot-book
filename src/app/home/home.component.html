@@ -1,0 +1,289 @@
+﻿<!-- begin:: services -->
+<!-- <div class="card mt-4">
+    <h4 class="card-header">Create Curriculum</h4>
+    <div class="card-body">
+        <main class="">
+            
+            <section class="service-section">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-md-3 col-lg-7">
+                            
+                             <table>
+                                <thead>
+                                    <tr>
+                                        <th>Program Type</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <input type="text" class="form-control" [(ngModel)]="programType" placeholder="Enter Program Type" />
+                                    </tr>
+                                </tbody>
+                             </table>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-3 col-lg-2">
+                            <div class="d-grid mb-3">
+                                <button type="button" class="btn btn-orange" data-bs-toggle="modal"
+                                    data-bs-target="#modal">Add Source Type</button>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-3 col-lg-2">
+                            <div class="d-grid mb-3">
+                                <button type="button" class="btn btn-blue-thick" (click)="openModalPerson()">Add Source Person</button>
+                            </div>
+                        </div>                        
+                    </div>
+                    <form [formGroup]="formGroup">
+                        <div class="mb-3">
+                            <table id="curriculum-table" class="table display nowrap" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>S.No.</th>
+                                        <th>Source Type</th>
+                                        <th>Source Person</th>
+                                        <th>Additional Details</th>
+                                        <th class="text-center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody formArrayName="rows">
+                                    <tr *ngFor="let row of rows.controls; let i = index" [formGroupName]="i">
+                                        <td>{{ i + 1 }}</td>
+                                        <td>
+                                            <select class="form-select" formControlName="serviceType">
+                                                <option value="">Select Service Type</option>
+                                                <option *ngFor="let list of sourceTypes" value="{{list.values}}">{{list.values}}</option>                                                
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="form-select" formControlName="person">
+                                                <option value="">Select Service Person</option>
+                                                <option *ngFor="let list of sourcePersons" value="{{list.values}}">{{list.values}}</option>
+                                            </select>
+
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" formControlName="additionalDetails"
+                                                placeholder="Enter Additional Details" />
+                                        </td>
+                                        <td class="text-center">
+                                            <a type="button" (click)="removeRow(i)">
+                                                <svg viewBox="0 0 24 24" width="24" height="24" fill="none"
+                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round" class="feather feather-trash-2">
+                                                    <path
+                                                        d="M9.62 1.025c-.408.08-.533.114-.75.202-.706.287-1.342.91-1.62 1.588-.193.469-.217.616-.239 1.415l-.02.77H4.922c-2.341 0-2.322-.002-2.623.299a.984.984 0 0 0 0 1.402c.247.247.442.299 1.127.299h.572l.012 6.77c.011 6.083.018 6.79.076 6.97.364 1.135 1.05 1.821 2.174 2.175.177.055.818.064 5.56.075 3.614.008 5.449-.001 5.633-.03a3.034 3.034 0 0 0 2.306-1.8c.235-.557.218-.015.231-7.39L20.002 7h.572c.685 0 .88-.052 1.127-.299a.984.984 0 0 0 0-1.402C21.4 4.998 21.419 5 19.078 5h-2.069l-.02-.77c-.014-.507-.041-.838-.08-.97-.354-1.196-1.268-2.03-2.429-2.217-.244-.04-4.668-.056-4.86-.018m4.72 2.041c.253.087.507.341.594.594.049.145.066.339.066.767V5H8.993l.014-.65c.013-.627.017-.657.124-.839.125-.213.318-.375.539-.454.118-.042.611-.054 2.313-.055 1.911-.002 2.185.006 2.357.064M18 13.573c0 7.381.024 6.805-.299 7.128-.32.32.082.299-5.701.299-5.783 0-5.381.021-5.701-.299-.323-.323-.299.253-.299-7.128V7h12v6.573m-8.357-3.504a1.118 1.118 0 0 0-.343.229c-.313.313-.3.157-.3 3.702 0 3.544-.013 3.39.299 3.701.18.18.459.299.701.299.242 0 .521-.119.701-.299.312-.311.299-.157.299-3.701s.013-3.39-.299-3.701a.998.998 0 0 0-1.058-.23m4 0a1.118 1.118 0 0 0-.343.229c-.313.313-.3.157-.3 3.702 0 3.544-.013 3.39.299 3.701.18.18.459.299.701.299.242 0 .521-.119.701-.299.312-.311.299-.157.299-3.701s.013-3.39-.299-3.701a.998.998 0 0 0-1.058-.23"
+                                                        fill-rule="evenodd" fill="#ed143d" stroke="none" />
+                                                </svg>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="text-end">
+                            <div class="row">
+                                <div class="col-12 col-sm-6 col-md-3 col-lg-7"></div>
+                                <div class="col-12 col-sm-6 col-md-3 col-lg-2">
+                                    <button type="button" class="btn btn-success" (click)="addRow()">Add Row</button>
+                                </div>
+                                <div class="col-12 col-sm-6 col-md-3 col-lg-2">
+                                    <button type="button" class="btn btn-orange" (click)="openModal()">View
+                                        Preview</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+            
+        </main>
+    </div>
+</div> -->
+<!-- end:: services -->
+<!-- <div class="card mt-4">
+    <h4 class="card-header">View All Curriculum</h4>
+    <div class="card-body">
+        <main class="">
+            <section class="service-section">
+                <div class="container-fluid">
+                    <div class="mb-3">
+                        <table id="curriculum-table" class="table display nowrap" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>S.No.</th>
+                                    <th>Program Type</th>
+                                    <th>Source Type</th>
+                                    <th>Source Person</th>
+                                    <th>Additional Details</th>                                    
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="errorMessage">
+                                <tr *ngFor="let list of curriculumData">
+                                    <td>{{list?.serialNo}}</td>
+                                    <td>{{list?.programType}}</td>
+                                    <td>{{list?.serviceType}}</td>
+                                    <td>{{list?.person}}</td>
+                                    <td>{{list?.additionalDetails}}</td>
+                                </tr>
+                            </tbody>                            
+                        </table>
+                        
+                        <div class="mat-elevation-z8">
+                            <table mat-table [dataSource]="dataSource" matSort class="mat-table">
+                        
+                                <ng-container matColumnDef="serialNo">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> S.No </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.serialNo}} </td>
+                                </ng-container>
+                    
+                                <ng-container matColumnDef="programType">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Program Type </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.programType}} </td>
+                                </ng-container>
+                    
+                                <ng-container matColumnDef="sourceType">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Source Type </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.sourceType}} </td>
+                                </ng-container>
+                    
+                                <ng-container matColumnDef="person">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Person </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.person}} </td>
+                                </ng-container>
+                    
+                                <ng-container matColumnDef="additionalDetails">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Additional Details </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.additionalDetails}} </td>
+                                </ng-container>
+                      
+                                
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                            </table>
+                            <mat-paginator [length]="curriculumData?.count" [pageSize]="pageSize"
+                                [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; onPaginationChange($event)"
+                                aria-label="Select page">
+                            </mat-paginator>
+                        </div>
+                        <div style="text-align: center; color: red;" *ngIf="errorMessage">
+                           <strong>{{errorMessage}}</strong>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+</div> -->
+
+<!-- Preview Modal -->
+
+<div class="modal fade" id="exampleModal" #exampleModal tabindex="-1" aria-modal="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Preview Form Data</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- <pre>{{ formGroup.value | json }}</pre> -->
+                 <div class="row">
+                    <div class="col-12 col-sm-6 col-md-3 col-lg-7">
+                        <label>
+                            <strong>Program Type:</strong>
+                        </label>
+                        {{programType}}
+                    </div>
+                 </div>
+                 <table class="table display nowrap" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>S.No.</th>
+                            <th>Service Type</th>
+                            <th>Resource Person</th>
+                            <th>Additional Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let list of formGroup.value.rows;let i=index">
+                            <td>{{i + 1}}</td>
+                            <td>{{list?.serviceType}}</td>
+                            <td>{{list?.person}}</td>
+                            <td>{{list?.additionalDetails}}</td>
+                        </tr>
+                    </tbody>
+                 </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Edit
+                </button>
+                <button type="button" class="btn btn-primary" (click)="submitData()">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-modal="true">
+    <div class="modal-dialog">
+        <form [formGroup]="modalFormStype" (ngSubmit)="onModalSubmitType()">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Source Type</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table>
+                        <thead>
+                            <tr>Source Type</tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <input type="text" class="form-control" formControlName="sourceType"  placeholder="Enter Source Type" />
+                                <div class="text-danger" *ngIf="modalFormStype.get('sourceType')?.touched && modalForm.get('sourceType')?.invalid">
+                                    Source Type is required.
+                                </div>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">                
+                    <button type="submit" class="btn btn-primary" [disabled]="modalFormStype.invalid">Submit</button>
+                </div>
+            </div>
+        </form>        
+    </div>
+</div>
+
+<div class="modal fade" id="modalperson" #ModalPerson aria-modal="true">
+    <div class="modal-dialog">
+        <form [formGroup]="modalForm" (ngSubmit)="onModalSubmit()">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalPersonLabel">Add Source Person</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table>
+                        <thead>
+                            <tr>Source Person</tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <input type="text" class="form-control"  formControlName="sourcePerson" placeholder="Enter Source Person" />
+                                <div class="text-danger" *ngIf="modalForm.get('sourcePerson')?.touched && modalForm.get('sourcePerson')?.invalid">
+                                    Source Person is required.
+                                </div>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">                
+                    <button type="submit" class="btn btn-primary" [disabled]="modalForm.invalid">Submit</button>
+                </div>
+            </div>
+        </form>
+        
+    </div>
+</div>

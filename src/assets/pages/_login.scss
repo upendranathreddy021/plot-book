@@ -1,0 +1,35 @@
+.login-bg{
+    background-image: url('img/login-bg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+
+.login-card{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 12px 12px 0 0;
+
+    .logo-icon{
+        width: 100px;
+        height: 100px;
+        margin-top: -70px;
+    
+        img{
+            height: 90px;
+        }
+    }
+}
+
+
+@media (min-width:567px){
+    .login-card{
+        position: static;
+        border-radius: 12px;
+    }
+}
+
+

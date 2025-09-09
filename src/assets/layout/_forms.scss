@@ -1,0 +1,16 @@
+@import '../abstracts/_variables.scss';
+@import '../abstracts/mixins';
+
+.form-control{
+    // border: none;
+    // background-color: #edeaff;
+    @include fs-md(14px);
+}
+
+// .form-control:focus{
+//     @include border-all(1px, solid, $purple)
+// }
+
+:focus-visible{
+    outline: 0;
+}

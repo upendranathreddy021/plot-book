@@ -1,0 +1,221 @@
+<main class="mt-4">
+    <section>
+        <div class="container-fluid">
+            <div class="card mb-3">
+                <div class="card-header bg-transparent">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            <h6 class="fw-600 mb-2 mb-sm-0">Total User List</h6>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-lime-green" data-bs-toggle="modal"
+                                data-bs-target="#addUser">Add User</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table id="view-table" class="table table-borderless table-striped nowrap w-100">
+                        <thead>
+                            <tr>
+                                <th>S.No</th>
+                                <th>Type Of User</th>
+                                <th>Full Name</th>
+                                <th>Email ID</th>
+                                <th>Mobil Number</th>
+                                <!-- <th>Gender</th>
+                                <th>Agency</th> -->
+                                <!-- <th class="text-center">Edit/Delete</th> -->
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="this.userList">
+                            <tr *ngFor="let item of this.userList; let i = index">
+                                <td class="text-start">{{i+1}}</td>
+                                <td>{{item?.userRole}}</td>
+                                <td>{{item?.firstName + item?.lastName}}</td>
+                                <td>{{item?.email}}</td>
+                                <td>{{item?.mobileNo}}</td>
+                                <!-- <td class="text-center">
+                                    <button type="button" class="btn btn-default text-lime-green btn-sm"><span class="bi bi-pencil"></span></button>
+                                    <button type="button" class="btn btn-default text-danger btn-sm"><span class="bi bi-trash"></span></button>
+                                </td> -->
+                            </tr>
+                        </tbody>
+                        <!-- <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>PIA Executive</td>
+                                <td>Ravi Kumar</td>
+                                <td>ravi@gmail.com</td>
+                                <td>9876543210</td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-default btn-sm text-lime-green me-2" title="Edit"><span class="bi bi-pencil"></span></button>
+                                    <button type="button" class="btn btn-default btn-sm text-danger" title="Delete"><span class="bi bi-trash"></span></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>PIA Executive</td>
+                                <td>Ravi Kumar</td>
+                                <td>ravi@gmail.com</td>
+                                <td>9876543210</td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-default btn-sm text-lime-green me-2" title="Edit"><span class="bi bi-pencil"></span></button>
+                                    <button type="button" class="btn btn-default btn-sm text-danger" title="Delete"><span class="bi bi-trash"></span></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>PIA Executive</td>
+                                <td>Ravi Kumar</td>
+                                <td>ravi@gmail.com</td>
+                                <td>9876543210</td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-default btn-sm text-lime-green me-2" title="Edit"><span class="bi bi-pencil"></span></button>
+                                    <button type="button" class="btn btn-default btn-sm text-danger" title="Delete"><span class="bi bi-trash"></span></button>
+                                </td>
+                            </tr>
+                        </tbody> -->
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- begin:: view modal -->
+<div class="modal fade" id="addUser" tabindex="-1" aria-labelledby="addResourceLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <form action="" [formGroup]="RegisterForm" (ngSubmit)="onModalSubmitRegister()">
+            <div class="modal-content">
+                <div class="modal-header py-2">
+                    <h6 class="modal-title text-green" id="addResourceLabel">Add User</h6>
+                    <button type="button" class="btn-close me-1" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-floating mb-3">
+                                <select class="form-select" id="floatingSelect"
+                                    aria-label="Floating label select example" formControlName="userRole">
+                                    <option selected>Select Type</option>
+                                    <option value="ADMIN">ADMIN</option>
+                                    <option value="AGENCY_MANAGER">PIA Manager</option>
+                                    <option value="AGENCY_EXECUTOR">PIA Executive</option>
+                                    <option value="CALL_CENTER">Call Center</option>
+                                    <option value="DEPARTMENT">DEPARTMENT</option>
+                                    <option value="SPIU">SPIU</option>
+                                </select>
+                                <label for="floatingSelect">Type Of User</label>
+                                <div *ngIf="f2['userRole'].touched && f2['userRole'].invalid" class="error"
+                                    style="color: red;">
+                                    <div *ngIf="f2['userRole'].errors?.['required']">User role is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12"
+                            *ngIf="f2['userRole'].value === 'AGENCY_MANAGER' || f2['userRole'].value === 'AGENCY_EXECUTOR'">
+                            <div class="form-floating mb-3">
+                                <select class="form-select" formControlName="department">
+                                    <option value="">Select Agency</option>
+                                    <option *ngFor="let list of agencyList" value="{{list.agencyId}}">
+                                        {{list.agencyName}}</option>
+                                    <!-- <option value="ALEAP">ALEAP</option>
+                            <option value="WeHub">WeHub</option>
+                            <option value="TIHCL">TIHCL</option> -->
+                                </select>
+                                <label for="department">Agency</label>
+                            </div>
+                        </div>
+                        <div class="col-12"
+                            *ngIf="f2['userRole'].value === 'ADMIN' || f2['userRole'].value === 'CALL_CENTER' || f2['userRole'].value === 'DEPARTMENT'">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" formControlName="department"
+                                    placeholder="Department">
+                                <label for="department">Department</label>
+                            </div>
+                        </div>
+                        <div class="col-12" *ngIf="f2['userRole'].value === 'SPIU'">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" formControlName="department"
+                                    placeholder="Department">
+                                <label for="department">Department</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="emailId" placeholder="Email ID"
+                                    formControlName="email">
+                                <label for="emailId">Email ID</label>
+                                <div *ngIf="f2['email'].touched && f2['email'].invalid" class="error"
+                                    style="color: red;">
+                                    <div *ngIf="f2['email'].errors?.['required']">Email is required</div>
+                                    <div *ngIf="f2['email'].errors?.['pattern']">Invalid email format</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="firstName" placeholder="First Name"
+                                    formControlName="firstName">
+                                <label for="firstName">First Name</label>
+                                <div *ngIf="f2['firstName'].touched && f2['firstName'].invalid" class="error"
+                                    style="color: red;">
+                                    <div *ngIf="f2['firstName'].errors?.['required']">First name is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="lastName" placeholder="Last Name"
+                                    formControlName="lastName">
+                                <label for="lastName">Last Name</label>
+                                <div *ngIf="f2['lastName'].touched && f2['lastName'].invalid" class="error"
+                                    style="color: red;">
+                                    <div *ngIf="f2['lastName'].errors?.['required']">Last name is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="mobileNumber" placeholder="Mobile Number"
+                                    formControlName="mobile">
+                                <label for="mobileNumber">Mobile Number</label>
+                                <div *ngIf="f2['mobile'].touched && f2['mobile'].invalid" class="error"
+                                    style="color: red;">
+                                    <div *ngIf="f2['mobile'].errors?.['required']">Mobile number is required</div>
+                                    <div *ngIf="f2['mobile'].errors?.['pattern']">Invalid mobile number format</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-floating mb-3">
+                                <select class="form-select" id="floatingSelectGender"
+                                    aria-label="Floating label select example" placeholder="Gender"
+                                    formControlName="gender">
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <label for="floatingSelectGender">Gender</label>
+                                <div *ngIf="f2['gender'].touched && f2['gender'].invalid" class="error"
+                                    style="color: red;">
+                                    <div *ngIf="f2['gender'].errors?.['required']">Gender is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-lime-green"
+                                    [ngClass]="{'disabled': RegisterForm.invalid}" [disabled]="RegisterForm.invalid"
+                                    data-bs-dismiss="modal">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- end:: view modal -->

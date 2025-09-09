@@ -1,0 +1,352 @@
+<div class="container-fluid p-4" style="background-color: aqua;">
+    <!-- Header with Mobile Number Search, Sector, Plot No, and Add Payment Button -->
+    <div class="card">
+        <h4 class="text-dark mb-0">Add Payment Details</h4>
+        
+    </div>
+
+    <!-- Search Mode Selection -->
+     <div class="card">
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="d-flex align-items-center gap-4">
+                <strong class="me-2">Search by:</strong>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="searchMode" id="customerSearch" 
+                           [value]="'customer'" [(ngModel)]="searchMode">
+                    <label class="form-check-label" for="customerSearch">
+                        Customer
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="searchMode" id="plotSearch" 
+                           [value]="'plot'" [(ngModel)]="searchMode">
+                    <label class="form-check-label" for="plotSearch">
+                        Plot Details
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search and Filter Section -->
+    <div class="row g-3 mb-4">
+        <!-- Customer Search Mode -->
+        <div *ngIf="searchMode === 'customer'" class="col-4">
+            <label for="mobileSearch" class="form-label">Mobile Number</label>
+            <div class="input-group mb-3">
+                <span class="input-group-text"><i class="bi bi-search"></i></span>
+                <input type="text" class="form-control" id="mobileSearch" placeholder="Search by mobile number">
+            </div>
+            <!-- Amount Input Styled -->
+            <!-- <div class="form-group mb-3">
+                <label for="amount" class="form-label">Amount</label>
+                <div class="input-group">
+                    <span class="input-group-text">₹</span>
+                    <input id="amount" type="number" placeholder="0.00" class="form-control"/>
+                </div>
+            </div> -->
+        </div>
+
+        <!-- Plot Details Search Mode -->
+        <ng-container *ngIf="searchMode === 'plot'">
+            <div class="col-md-3 form-group">
+                <label for="sectorSelect" class="form-label">Sector</label>
+                <div class="select-wrapper">
+                <select id="sectorSelect" class="form-select">
+                    <option selected>Select Sector</option>
+                    <option value="1">Sector 1</option>
+                    <option value="2">Sector 2</option>
+                    <option value="3">Sector 3</option>
+                </select>
+                
+            </div>
+            </div>
+
+            <div class="col-md-3 form-group">
+                <label for="plotSelect" class="form-label">Plot No.</label>
+                <div class="select-wrapper">
+                    <select id="plotSelect" class="form-select">
+                        <option selected>Select Plot No.</option>
+                        <option value="101">Plot 101</option>
+                        <option value="102">Plot 102</option>
+                        <option value="103">Plot 103</option>
+                    </select>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+    </div>
+
+    <!-- Status Cards -->
+    <div class="row g-3 mb-4">
+        <div class="col-lg-3">
+            <div class="card border-0 shadow-sm bg-white">
+                <div class="card-body d-flex align-items-center py-2 px-2">
+                    <div class="me-2">
+                        <i class="bi bi-clock-history fs-3 text-secondary"></i>
+                    </div>
+                    <div>
+                        <h6 class="card-title mb-1" style="font-size: 1rem;">Pending Payment</h6>
+                        <p class="card-text text-muted mb-0" style="font-size: 0.9rem;">4 records pending</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="card border-0 shadow-sm bg-white">
+                <div class="card-body d-flex align-items-center py-2 px-2">
+                    <div class="me-2">
+                        <i class="bi bi-file-earmark-text fs-3 text-secondary"></i>
+                    </div>
+                    <div>
+                        <h6 class="card-title mb-1" style="font-size: 1rem;">Document Status</h6>
+                        <p class="card-text text-muted mb-0" style="font-size: 0.9rem;">2 documents pending</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Records Table -->
+    <div class="card border-0 shadow-sm">
+        <div class="card-header bg-white border-0 pt-3 d-flex justify-content-between">
+            <h5 class="mb-0">Previous Payment Details</h5>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPaymentModal">
+            <i class="bi bi-plus-lg me-1"></i> Add Payment
+        </button>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="px-3 py-3">S.NO</th>
+                            <th class="px-3 py-3">DATE</th>
+                            <th class="px-3 py-3">AMOUNT</th>
+                            <th class="px-3 py-3">BANK</th>
+                            <th class="px-3 py-3">FROM</th>
+                            <th class="px-3 py-3">TRANSACTION ID</th>
+                            <th class="px-3 py-3">DISCOUNT DATE</th>
+                            <th class="px-3 py-3">DISCOUNT AMOUNT</th>
+                            <th class="px-3 py-3">ACTIONS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let record of paymentRecords">
+                            <td class="px-3 py-3">{{ record.sNo }}</td>
+                            <td class="px-3 py-3">{{ record.date }}</td>
+                            <td class="px-3 py-3 text-success fw-bold">₹{{ record.amount | number }}</td>
+                            <td class="px-3 py-3">{{ record.bank }}</td>
+                            <td class="px-3 py-3">{{ record.from }}</td>
+                            <td class="px-3 py-3">{{ record.transactionId }}</td>
+                            <td class="px-3 py-3">{{ record.discountDate }}</td>
+                            <td class="px-3 py-3 text-success fw-bold">₹{{ record.discountAmount | number }}</td>
+                            <td class="px-3 py-3">
+                                <button class="btn btn-sm btn-outline-primary me-2">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer bg-white border-0 text-end">
+            <h5 class="mb-0 text-success">Total Amount: ₹{{ getTotalAmount() | number }}</h5>
+        </div>
+    </div>
+</div>
+
+<!-- Add Payment Modal -->
+<div class="modal fade" id="addPaymentModal" tabindex="-1" aria-labelledby="addPaymentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <h5 class="modal-title" id="addPaymentModalLabel">Add Payment Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="addPaymentForm">
+                    <!-- Total Price Section -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="bg-light p-3 rounded">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="text-muted">Total Due</span>
+                                    <h4 class="text-primary mb-0">₹{{ totalPrice | number }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Current Payment Section -->
+                    <h6 class="mb-3">Current Payment</h6>
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <label for="paymentDate" class="form-label">Date</label>
+                            <input type="date" class="form-control" id="paymentDate" formControlName="date">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="paymentAmount" class="form-label">Amount</label>
+                            <div class="input-group">
+                                <span class="input-group-text">₹</span>
+                                <input type="number" class="form-control" id="paymentAmount" formControlName="amount" placeholder="Enter amount">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <label for="paymentFrom" class="form-label">From</label>
+                            <input type="text" class="form-control" id="paymentFrom" formControlName="from" placeholder="Enter payer name">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="transactionId" class="form-label">Transaction ID</label>
+                            <input type="text" class="form-control" id="transactionId" formControlName="transactionId" placeholder="Enter transaction ID">
+                        </div>
+                    </div>
+
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <label for="bankName" class="form-label">Bank Name</label>
+                            <input type="text" class="form-control" id="bankName" formControlName="bankName" placeholder="Enter bank name">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="paymentMode" class="form-label">Payment Mode</label>
+                            <select class="form-select" id="paymentMode" formControlName="paymentMode">
+                                <option value="">Select payment mode</option>
+                                <option value="cash">Cash</option>
+                                <option value="cheque">Cheque</option>
+                                <option value="online">Online Transfer</option>
+                                <option value="card">Card Payment</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Discount Given Section -->
+                    <h6 class="mb-3">Discount Given</h6>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="discountDate" class="form-label">Date</label>
+                            <input type="date" class="form-control" id="discountDate" formControlName="discountDate">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="discountAmount" class="form-label">Amount</label>
+                            <div class="input-group">
+                                <span class="input-group-text">₹</span>
+                                <input type="number" class="form-control" id="discountAmount" formControlName="discountAmount" placeholder="Enter discount amount">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" (click)="onSavePayment()" [disabled]="addPaymentForm.invalid">Save Payment</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="app-container">
+  <div class="text-center space-y-4">
+    <h1 class="heading-xl">Modern Aqua UI Theme</h1>
+    <p class="heading-sub">Refined design system with exact color specifications</p>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">
+        <span class="dot"></span> Button Components
+      </h2>
+      <p class="card-desc">Primary and secondary button styles</p>
+    </div>
+    <div class="card-content">
+      <button class="btn btn-primary">
+        <i class="icon-plus"></i> Add New
+      </button>
+      <button class="btn btn-outline-primary">
+        <i class="icon-edit"></i> Edit Item
+      </button>
+      <button class="btn btn-outline-danger">
+        <i class="icon-trash"></i> Delete
+      </button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title"><i class="icon-filter"></i> Filters & Inputs</h2>
+      <p class="card-desc">Input fields with prefix/suffix symbols and filter controls</p>
+    </div>
+    <div class="card-content grid-2">
+      <div class="form-group">
+        <label for="search">Search</label>
+        <div class="input-wrapper">
+          <i class="icon-search"></i>
+          <input id="search" type="text" placeholder="Search users..." class="form-input"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="amount">Amount</label>
+        <div class="input-wrapper">
+          <span class="input-prefix">₹</span>
+          <input id="amount" type="number" placeholder="0.00" class="form-input"/>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title"><span class="dot"></span> Data Table</h2>
+      <p class="card-desc">Modern table with alternating rows</p>
+    </div>
+    <div class="card-content">
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th>Name</th><th>Email</th><th>Status</th><th>Amount</th><th>Progress</th><th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of tableData; let i=index" [class.alt-row]="i % 2 !== 0">
+            <td>{{row.name}}</td>
+            <td>{{row.email}}</td>
+            <td><span class="badge" [ngClass]="getStatusClass(row.status)">{{row.status}}</span></td>
+            <td>₹{{row.amount}}</td>
+            <td>
+              <div class="progress">
+                <div class="progress-bar" [style.width.%]="row.progress"></div>
+              </div>
+              <span>{{row.progress}}%</span>
+            </td>
+            <td>
+              <button class="btn-icon btn-edit"><i class="icon-edit"></i></button>
+              <button class="btn-icon btn-delete"><i class="icon-trash"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div> -->

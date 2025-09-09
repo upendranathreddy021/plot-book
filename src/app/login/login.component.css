@@ -1,0 +1,36 @@
+.imgUrl{
+    background: url('../../assets/img/large-buildings-view-from-field.jpg') no-repeat center center;
+    background-size: cover;
+    /* height: 100vh; */
+}
+.login-content {
+    background-color: #f0f2f5;
+}
+
+.password-toggle {
+    cursor: pointer;
+}
+
+.input-group {
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+    align-items: center;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.input-group .form-control,
+.input-group .input-group-text {
+    border: 0;
+    background-color: transparent;
+}
+
+.input-group:focus-within {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    border-radius: 0.375rem; /* Match Bootstrap's default border-radius */
+}
+
+.form-control:focus {
+    box-shadow: none;
+}
+

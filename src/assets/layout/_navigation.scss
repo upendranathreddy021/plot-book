@@ -1,0 +1,45 @@
+@charset "UTF-8";
+@import '../abstracts/mixins';
+@import '../abstracts/variables';
+.dropdown-menu[data-bs-popper]{
+    right: 0;
+    left: auto;
+}
+
+// .navbar-nav {
+//     .dropdown-menu{
+//         position: absolute;
+//     }
+// }
+
+
+.navbar-expand-lg .navbar-nav {
+    flex-direction: row;
+}
+
+.nav-link{
+    margin-left: 15px;
+}
+
+.dropdown-menu{
+    .show{        
+        box-shadow: 0 0.125rem 0.25rem rgba(29, 58, 83, 0.15);
+    }
+
+    li{
+        border-bottom: 1px solid #ccc;
+        @include fs-md(14px);
+
+        &:last-child{
+            border: none;
+        }
+        &:hover{
+            background-color: $lime-green;
+        }
+        a{
+            &:hover{
+                color: $white;
+            }
+        }
+    }
+}
