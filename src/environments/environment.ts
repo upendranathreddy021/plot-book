@@ -4,10 +4,8 @@
 
 export const environment = {
     production: false,
-    // apiUrl: 'http://localhost:8080'
-    //apiUrl: 'http://192.168.30.150:8086/api'
-    // apiUrl:'https://tihcl.com/tihcl/api',
-    apiUrl:`http://52.4.130.165:8081/tihcl/api`
+    
+    apiUrl:`api`
 };
 
 /*
